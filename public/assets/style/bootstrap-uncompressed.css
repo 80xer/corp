@@ -7625,6 +7625,13 @@ a.badge:focus {
     margin-left: 0px !important;
   }
 }
+
+@media (max-height: 480px) {
+/*rich*/
+	.page-welcome .logo {
+		margin-bottom: -50px;
+	}
+}
 @media (max-width: 768px) {
   body {
     padding-top: 0;
