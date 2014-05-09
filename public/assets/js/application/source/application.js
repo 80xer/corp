@@ -41,7 +41,7 @@ $(document).ready(function(){
     $('#quote-slider').each(function(){
         if($('.item', this).length) {
             $(this).carousel({
-                interval: 20000
+                interval: 5000
             });
         }
     });
@@ -69,26 +69,26 @@ $(document).ready(function(){
     }
     
     /* Emulate touch on table/mobile touchstart. */
-    if(typeof(window.ontouchstart) != 'undefined') {
-        var touchElements = [".social-icons a", ".portfolio-items li", ".about-items .item"];
-        
-        $.each(touchElements, function (i, val) {
-            $(val).each(function(i, obj) {
-                $(obj).bind('click', function(e){
-                
-                    if($(this).hasClass('clickInNext')){
-                        $(this).removeClass('clickInNext');
-                    } else {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        $(this).mouseover();
-                        $(this).addClass('clickInNext');
-                    }
-                });
-            });
-        });
-    }
+//    if(typeof(window.ontouchstart) != 'undefined') {
+//        var touchElements = [".social-icons a", ".portfolio-items li", ".about-items .item"];
+//
+//        $.each(touchElements, function (i, val) {
+//            $(val).each(function(i, obj) {
+//                $(obj).bind('click', function(e){
+//
+//                    if($(this).hasClass('clickInNext')){
+//                        $(this).removeClass('clickInNext');
+//                    } else {
+//                        e.preventDefault();
+//                        e.stopPropagation();
+//
+//                        $(this).mouseover();
+//                        $(this).addClass('clickInNext');
+//                    }
+//                });
+//            });
+//        });
+//    }
 
     /**
     *   BLOCK | Navigation
@@ -171,16 +171,23 @@ $(document).ready(function(){
     *   Pull latest tweets from user.
     *   Configuration: /plugins/twitter/index.php
     */
-    $('#twitterfeed-slider').tweet({
-        modpath: 'plugins/twitter/',
-        username: 'TheGridelicious',
-        count: 3
-    });
-    
-    $('#twitterfeed-slider').tweetCarousel({
-        interval: 7000,
-        pause: "hover"
-    });
+//    $('#twitterfeed-slider').tweet({
+//        modpath: 'plugins/twitter/',
+//        username: 'TheGridelicious',
+//        count: 3
+//    });
+//
+//    $('#twitterfeed-slider').tweetCarousel({
+//        interval: 7000,
+//        pause: "hover"
+//    });
+  $('#twitter-slider').each(function(){
+    if($('.item', this).length) {
+      $(this).carousel({
+        interval: 10000
+      });
+    }
+  });
 });
 
 
