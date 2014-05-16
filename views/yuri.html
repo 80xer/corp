@@ -72,7 +72,7 @@
             <input id="uploadAddress" type="submit" name="uploadAddress"/>
           </form>
 
-          <form method="post" action="sendYuriEmail">
+          <form method="post" action="sendYooriEmail">
             TITLE<input style="background-color: #fff;" id="emailSubject" name="emailSubject" type="text" class="span12" placeholder="Title" value="Hi $name!" required="required">
             TO
             <div>
@@ -270,7 +270,7 @@
     });
 
     function sendMail(content) {
-      $.ajax('/sendYuriEmail', {type: 'POST', data:content}).success(function (data) {
+      $.ajax('/sendYooriEmail', {type: 'POST', data:content}).success(function (data) {
 //        $('#emailSubject').val('');
 //        $('#emailFrom').val('');
 //        $('#emailBody').val('');
