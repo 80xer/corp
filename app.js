@@ -20,6 +20,8 @@ app.use(express.logger('dev'));
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.bodyParser({keepExtensions:true,uploadDir:path.join(__dirname,'/files')}));
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -34,6 +36,58 @@ app.get('/', function (req, res) {
 
 app.get('/yuri', function (req, res) {
   res.sendfile(__dirname + '/views/' + 'yuri.html');
+});
+
+app.post('/uploadAddress', function (req, res) {
+  var fs = require('fs');
+
+  fs.readFile(req.files.openAddress.path, function (err, data) {
+    var filePath = __dirname + '/files/' + req.files.openAddress.name;
+    fs.writeFile(filePath, data, function (err) {
+      if (err) {
+        throw err;
+      } else {
+        fs.unlink(req.files.openAddress.path, function (err) {
+          if (err) throw err;
+        });
+        res.redirect('back');
+      }
+    });
+  });
+});
+
+app.get('/getAddress', function (req, res) {
+  var fs = require('fs');
+  var arr = [];
+
+  function readLines(input, func) {
+    var remaining = '';
+
+    input.on('data', function(data) {
+      remaining += data;
+      var index = remaining.indexOf('\n');
+      while (index > -1) {
+        var line = remaining.substring(0, index);
+        remaining = remaining.substring(index + 1);
+        arr.push(line);
+        index = remaining.indexOf('\n');
+      }
+    });
+
+    input.on('end', function() {
+      if (remaining.length > 0) {
+        arr.push(remaining);
+      }
+      res.send(arr);
+    });
+  }
+
+  function func(data) {
+    console.log('Line: ' + data);
+  }
+
+  var input = fs.createReadStream(__dirname + '/files/mail.txt');
+  readLines(input, func);
 });
 
 app.post('/sendEmail', function (req, res) {
@@ -63,6 +117,51 @@ app.post('/sendEmail', function (req, res) {
       res.send('sended email');
     }
   });
+});
+
+app.post('/sendYuriEmail', function (req, res) {
+  var email     = require("emailjs/email");
+  var server     = email.server.connect({
+    user:    "thisground.office",
+    password:"eltmrmfkdnsem",
+//    user:    "eedonge",
+//    password:"@leh@8080",
+    host:    "smtp.gmail.com",
+    ssl:     true
+  });
+
+  var toto = req.body.emailTo.toString().split(',');
+  var len = toto.length;
+
+  for (var i = 0; i < len; i++) {
+    var index = toto[i].indexOf('<');
+    var name = toto[i];
+
+    if (index > -1) {
+      name = toto[i].substring(0, index);
+    }
+
+    // send the message and get a callback with an error or details of the message that was sent
+    server.send({
+      text: req.body.emailBody.replace(/\$name/g, name),
+      from: req.body.emailFrom,
+      to: toto[i],
+      cc: "",
+      subject: req.body.emailSubject.replace(/\$name/g, name),
+      attachment:
+        [
+          {data:req.body.emailHTML.replace(/\$name/g, name), alternative:true}
+        ]
+    }, function (err, message) {
+      if (err) {
+        console.log('error send email');
+        console.log(err);
+      } else {
+//        console.log(message);
+        res.send('sended email');
+      }
+    });
+  }
 });
 
 http.createServer(app).listen(app.get('port'), function(){
