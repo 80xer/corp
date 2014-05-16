@@ -32,6 +32,10 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/views/' + 'index.html');
 });
 
+app.get('/yuri', function (req, res) {
+  res.sendfile(__dirname + '/views/' + 'yuri.html');
+});
+
 app.post('/sendEmail', function (req, res) {
   var email     = require("emailjs/email");
   var server     = email.server.connect({
