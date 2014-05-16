@@ -123,65 +123,65 @@ app.get('/files/:fileName', function (req, res) {
   res.sendfile(__dirname + '/files/' + req.params.fileName);
 })
 
-app.post('/sendYooriEmail2', function (req, res) {
-  var nodemailer = require("nodemailer");
-  var smtpTransport = nodemailer.createTransport("SMTP", {
-    service: "Gmail",
-    auth: {
-      user: "thisground.office@gmail.com",
-      pass: "eltmrmfkdnsem"
-    }
-  });
-
-  var toto = req.body.emailTo.toString().split(',');
-  var len = toto.length;
-  var mailOptions;
-
-  var sign = '<div>' +
-    '<div dir="ltr">' +
-    '<img src="http://thisground.com/files/logo.png" width="96" height="30">' +
-    '<br>' +
-    '<div></div>' +
-    '<div></div>'
-
-  for (var i = 0; i < len; i++) {
-    var index = toto[i].indexOf('<');
-    var name = toto[i];
-    var to = toto[i];
-
-    if (index > -1) {
-      name = toto[i].substring(0, index);
-      to = toto[i].substring(index + 1, toto[i].length - 1);
-    }
-
-
-    mailOptions = {
-      from: "YooriKim<YooriKim@thisground.com>", // sender address
-      to: to,
-      subject: req.body.emailSubject.replace(/\$name/g, name),
-      text: req.body.emailBody.replace(/\$name/g, name),
-      html: req.body.emailHTML.replace(/\$name/g, name) + sign,
-      attachments: [{
-        filename: "logo.png",
-        filePath: "/files/",
-        cid: "logo@thisground.com" //same cid value as in the html img src
-      }]
-    };
-
-    smtpTransport.sendMail(mailOptions, function(error, response){
-      if(error){
-        console.log(error);
-      }else{
-        console.log("Message sent: " + response.message);
-        res.send('sent email');
-      }
-
-      // if you don't want to use this transport object anymore, uncomment following line
-      //smtpTransport.close(); // shut down the connection pool, no more messages
-    });
-  }
-
-});
+//app.post('/sendYooriEmail2', function (req, res) {
+//  var nodemailer = require("nodemailer");
+//  var smtpTransport = nodemailer.createTransport("SMTP", {
+//    service: "Gmail",
+//    auth: {
+//      user: "thisground.office@gmail.com",
+//      pass: "eltmrmfkdnsem"
+//    }
+//  });
+//
+//  var toto = req.body.emailTo.toString().split(',');
+//  var len = toto.length;
+//  var mailOptions;
+//
+//  var sign = '<div>' +
+//    '<div dir="ltr">' +
+//    '<img src="http://thisground.com/files/logo.png" width="96" height="30">' +
+//    '<br>' +
+//    '<div></div>' +
+//    '<div></div>'
+//
+//  for (var i = 0; i < len; i++) {
+//    var index = toto[i].indexOf('<');
+//    var name = toto[i];
+//    var to = toto[i];
+//
+//    if (index > -1) {
+//      name = toto[i].substring(0, index);
+//      to = toto[i].substring(index + 1, toto[i].length - 1);
+//    }
+//
+//
+//    mailOptions = {
+//      from: "YooriKim<YooriKim@thisground.com>", // sender address
+//      to: to,
+//      subject: req.body.emailSubject.replace(/\$name/g, name),
+//      text: req.body.emailBody.replace(/\$name/g, name),
+//      html: req.body.emailHTML.replace(/\$name/g, name) + sign,
+//      attachments: [{
+//        filename: "logo.png",
+//        filePath: "/files/",
+//        cid: "logo@thisground.com" //same cid value as in the html img src
+//      }]
+//    };
+//
+//    smtpTransport.sendMail(mailOptions, function(error, response){
+//      if(error){
+//        console.log(error);
+//      }else{
+//        console.log("Message sent: " + response.message);
+//        res.send('sent email');
+//      }
+//
+//      // if you don't want to use this transport object anymore, uncomment following line
+//      //smtpTransport.close(); // shut down the connection pool, no more messages
+//    });
+//  }
+//
+//});
 
 app.post('/sendYooriEmail', function (req, res) {
   var email     = require("emailjs/email");
