@@ -11,8 +11,10 @@ var path = require('path');
 
 var app = express();
 
+var auth = false;
+
 // all environments
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 11111);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -35,7 +37,29 @@ app.get('/', function (req, res) {
 });
 
 app.get('/yoori', function (req, res) {
-  res.sendfile(__dirname + '/views/' + 'yoori.html');
+  res.sendfile(__dirname + '/views/' + 'yoorilogin.html');
+//  res.sendfile(__dirname + '/views/' + 'yoori.html');
+});
+
+app.get('/yoorimail', function (req, res) {
+  console.log('bef auth:');
+  console.log(auth);
+  if (auth === true) {
+    auth = false;
+    console.log('aft auth:');
+    console.log(auth);
+    res.sendfile(__dirname + '/views/' + 'yoori.html');
+  } else {
+    res.sendfile(__dirname + '/views/' + 'loginfail.html');
+  }
+});
+
+app.post('/yoorimail', function (req, res) {
+  if (req.body.id === 'yoori' && req.body.pass === 'dbflapdlf') {
+    res.sendfile(__dirname + '/views/' + 'yoori.html');
+  } else {
+    res.sendfile(__dirname + '/views/' + 'loginfail.html');
+  }
 });
 
 app.post('/uploadAddress', function (req, res) {
@@ -43,16 +67,21 @@ app.post('/uploadAddress', function (req, res) {
 
   fs.readFile(req.files.openAddress.path, function (err, data) {
     var filePath = __dirname + '/files/' + req.files.openAddress.name;
-    fs.writeFile(filePath, data, function (err) {
-      if (err) {
-        throw err;
-      } else {
-        fs.unlink(req.files.openAddress.path, function (err) {
-          if (err) throw err;
-        });
-        res.redirect('back');
-      }
-    });
+    auth = true;
+    if (req.files.openAddress.name.length == 0) {
+      res.redirect('back');
+    } else {
+      fs.writeFile(filePath, data, function (err) {
+        if (err) {
+          throw err;
+        } else {
+          fs.unlink(req.files.openAddress.path, function (err) {
+            if (err) throw err;
+          });
+          res.redirect('back');
+        }
+      });
+    }
   });
 });
 
@@ -216,7 +245,8 @@ app.post('/sendYooriEmail', function (req, res) {
     '<div>' +
     '<font face="times new roman, serif">' +
     '<span style="color:rgb(51,51,51);font-size:12px;line-height:15.359999656677246px">' +
-    '<a href="https://www.facebook.com/pages/THISGROUND/306451286160039" target="_blank"><img src="http://thisground.com/files/fb.png">' +
+    '<a href="https://www.facebook.com/pages/THISGROUND/306451286160039" target="_blank">' +
+    '<img src="http://thisground.com/files/fb.png">' +
     '</a>' +
     '&nbsp;&nbsp;' +
     '<a href="http://instagram.com/thisground" target="_blank">' +

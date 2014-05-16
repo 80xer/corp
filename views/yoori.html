@@ -27,16 +27,14 @@
   <link href="stylesheets/index.css" rel="stylesheet">
 
 
-  <!-- JQUERY -->
-  <!-- TWITTER BOOTSTRAP -->
-
-
   <script src="assets/js/jquery-1.10.2.min.js" type="text/javascript"></script>
   <script src="external/jquery.hotkeys.js"></script>
   <script src="assets/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
   <!--[if lt IE 9]>
   <script src="assets/js/bootstrap/html5shiv.js"></script>
   <![endif]-->
+
+  <!-- http://mindmup.github.io/bootstrap-wysiwyg/ -->
   <script src="external/google-code-prettify/prettify.js"></script>
   <script src="external/bootstrap-wysiwyg.js" type="text/javascript"></script>
 
@@ -58,9 +56,11 @@
     <header>
       <h4 class="line-divider">thisground mail</h4>
 
+      <button id="usage" type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom">
+        Usage
+      </button>
     </header>
     <!-- End Header -->
-
     <!-- Start Article -->
     <article>
       <div class="row-fluid">
@@ -76,8 +76,8 @@
             TITLE<input style="background-color: #fff;" id="emailSubject" name="emailSubject" type="text" class="span12" placeholder="Title" value="Hi $name!" required="required">
             TO
             <div>
-              <button style="float:right" id="changeFile" class="btn btn-info">CHANGE</button>
-              <button style="float:right; margin-right:10px;" id="showAllAddress" class="btn btn-info">SHOW ALL</button>
+              <button style="float:right" id="changeFile" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="파일올리기 영역<br>보기/숨기기">CHANGE FILE</button>
+              <button style="float:right; margin-right:10px;" id="showAllAddress" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="받는 사람 모든 목록<br>보기/숨기기">SHOW ALL</button>
               <div style="overflow: hidden; padding-right: .5em;">
                 <input style="background-color: #fff;" id="to" name="to" readonly type="text" class="span12" placeholder="Email" required="required">
               </div>
@@ -95,8 +95,8 @@
             <div id="fileUpload" style="display:none;">
               FILE
               <div>
-                <button style="float:right" id="linkUpload" class="btn btn-info">UPLOAD</button>
-                <button style="float:right; margin-right:10px;" id="linkOpen" class="btn btn-info">FILE</button>
+                <button style="float:right" id="linkUpload" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="파일올리기">UPLOAD</button>
+                <button style="float:right; margin-right:10px;" id="linkOpen" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="파일선택 창 열기">SELECT FILE</button>
                 <div style="overflow: hidden; padding-right: .5em;">
                   <input style="background-color: #fff;" id="localFilePath" readonly type="text" class="span12" placeholder="file name" required="required">
                 </div>
@@ -170,13 +170,40 @@
               </div>
 
               <div id="editor">
+                <div style="font-family: arial, sans-serif; font-size: 13px;"><font face="Times New Roman" style="font-size: 12pt;">Hello,&nbsp;</font><br><div><font face="Times New Roman" style="font-size: 12pt;"><br></font><br><font face="Times New Roman" style="font-size: 12pt;">My name is Yoori, a CMO of&nbsp;</font><font face="Times New Roman" style="font-size: 12pt;"><b>startup called THISGROUND.</b></font><font face="Times New Roman" style="font-size: 12pt;"><br></font><br><font face="Times New Roman" style="font-size: 12pt;"><br></font><br><font face="Times New Roman" style="font-size: 12pt;">We are&nbsp;</font><font face="Times New Roman" style="font-size: 12pt;">contacting you to introduce&nbsp;</font><font face="Times New Roman" style="font-size: 12pt;">our startup and ask for your consideration on participating in our project.&nbsp;</font><font face="Times New Roman" style="font-size: 12pt;"><br></font><br><font face="Times New Roman" style="font-size: 12pt;"><br></font><br><font face="Times New Roman" style="font-size: 12pt;">THISGROUND is an exclusive invite-only social networking platform for artists from all over the world.&nbsp;</font><font face="Times New Roman" style="font-size: 12pt;"><br></font><br><font face="Times New Roman" style="font-size: 12pt;"><br></font><br></div><div><div><p dir="ltr"><font face="Times New Roman" style="font-size: 12pt;">In the first stage, we are going to work with 300 invited artists (including you hopefully ;) )and in the near future, we are thinking about expanding members. New members will be invited only through your recommendation. We are going to work with all kinds of artist from photography, music, video, painting and so on.&nbsp;</font><font face="Times New Roman" style="font-size: 12pt;"><br></font></p><p dir="ltr"><font face="Times New Roman" style="font-size: 12pt;"><br></font></p></div><p dir="ltr"><font face="Times New Roman" style="font-size: 12pt;">We saw all of your works, and all was super inspiring! So we would like to invite you to become part of our project. Before we go official we would like to advertise your work through existing social network services like facebook, instagram, Tumblr etc.</font></p><p dir="ltr"><font face="Times New Roman" style="font-size: 12pt;"><br></font></p></div><div><p dir="ltr"><font face="Times New Roman" style="font-size: 12pt;">Would it be OK for us to introduce your work to our social platform?</font></p><p dir="ltr"><font face="Times New Roman" style="font-size: 12pt;"></font><font face="Times New Roman" style="font-size: 12pt;"><br></font></p></div></div><div style="font-family: arial, sans-serif; font-size: 13px;"><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><font face="Times New Roman" style="font-size: 12pt;">Please visit our facebook page&nbsp;</font></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><font face="Times New Roman" style="font-size: 12pt;">(</font><font face="Times New Roman" style="font-size: 12pt;"><a href="https://www.facebook.com/pages/THISGROUND/306451286160039" target="_blank" style="color: rgb(17, 85, 204);">https://www.facebook.com/<wbr>pages/THISGROUND/<wbr>306451286160039</a></font><font face="Times New Roman" style="font-size: 12pt;">), and please let me know.</font></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><br></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><font face="Times New Roman" style="font-size: 12pt;">I wish we could work together!&nbsp;<br></font></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><font face="Times New Roman" style="font-size: 12pt;">Looking forward to hearing back from you soon!</font></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><br></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><font face="Times New Roman" style="font-size: 12pt;">Thank you!</font></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><br></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><br></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><font face="Times New Roman" style="font-size: 12pt;">Very Best,</font></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><br><font face="Times New Roman" style="font-size: 12pt;">Yoori</font></p><p dir="ltr" style="color: rgb(34, 34, 34); line-height: normal;"><font style="font-size: 12pt;"><br></font><font face="Times New Roman" style="font-size: 12pt;">CMO of&nbsp;</font><font face="Times New Roman" style="font-size: 12pt;"><b>startup called THISGROUND</b></font></p><div><font face="Times New Roman" style="font-size: 12pt;"><b><br></b></font></div></div>
+              </div>
+            </div>
+
+            <div style="margin-top:10px;">
+              SIGNATURE
+              <div id="editorSign">
+                <img src="http://thisground.com/files/logo.png" width="96" height="30" style="color: rgb(34, 34, 34); font-family: arial, sans-serif; line-height: normal;"><br style="color: rgb(34, 34, 34); font-family: arial, sans-serif; line-height: normal;"><div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; line-height: normal;"><font face="times new roman, serif"><span style="color: rgb(51, 51, 51); font-size: 12px; line-height: 15.359999656677246px;">Build your ground in&nbsp;<b>THISGROUD</b>&nbsp;with various inspiration!&nbsp;</span><br style="color: rgb(51, 51, 51); font-size: 12px; line-height: 15.359999656677246px;"><span style="color: rgb(51, 51, 51); font-size: 12px; line-height: 15.359999656677246px;"><b>THISGROUND</b>&nbsp;is a place to share creative activity.</span></font><br></div><div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; line-height: normal;"><font face="times new roman, serif"><span style="color: rgb(51, 51, 51); font-size: 12px; line-height: 15.359999656677246px;"><a href="https://www.facebook.com/pages/THISGROUND/306451286160039" target="_blank" style="color: rgb(17, 85, 204);"><img src="http://thisground.com/files/fb.png"></a>&nbsp;&nbsp;<a href="http://instagram.com/thisground" target="_blank" style="color: rgb(17, 85, 204);"><img src="http://thisground.com/files/ig.png"></a></span></font></div>
+              </div>
+            </div>
+            <div style="height:40px; margin-top:10px;">
+              <button style="float:left; margin-top:5px;" id="getHTML" type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="HTML코드(읽기전용)<br>보기/숨기기">HTML CODE</button>
+              <button style="float:right; margin-top:5px;" id="emailSubmit" type="submit" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="메일 보내기">Submit</button>
+            </div>
+
+            <div style="display:none; height:300px;">
+              <div style="height:300px; overflow:auto;" class="span5">
 
               </div>
-              <textarea style="display:none;" id="emailBody" name="emailBody" rows="10" class="span12" required="required">
+              <div class="span2">
 
-              </textarea>
+              </div>
+              <div class="span5">
+
+              </div>
             </div>
-            <button style="float:right; margin-top:5px;" id="emailSubmit" type="submit" class="btn btn-info">Submit</button>
+
+            <div id="innerHtmlDiv" style="display:none; margin-top:30px;">
+              CONTENT
+              <textarea readonly style="margin-top:10px; font-size: 0.9em; background-color: #fff;" id="innerHtml" name="innerHtml" rows="20" class="span12"></textarea>
+              SIGNATURE
+              <textarea readonly style="margin-top:10px; font-size: 0.9em; background-color: #fff;" id="innerHtmlSign" name="innerHtml" rows="20" class="span12"></textarea>
+            </div>
+
           </form>
         </div>
         <!-- End Contact form -->
@@ -193,6 +220,17 @@
 
 <script>
   $(function(){
+    $('#usage').popover({
+      trigger: 'hover',
+      html: true,
+      content: '받는 사람 목록은 .txt 파일을 업로드 하여 관리하며 txt 파일에는 각 줄마다 <br>"받는사람이름<메일주소>" 형태로 입력되어야한다.<br>제목과 본문중에 "$name"이라고 작성된 부분은 실제로 보내지는 메일에서는 <br>받는사람이름으로 대체된다.'
+    });
+    $('#changeFile').tooltip({html:true});
+    $('#showAllAddress').tooltip({html:true});
+    $('#linkUpload').tooltip({html:true});
+    $('#linkOpen').tooltip({html:true});
+    $('#getHTML').tooltip({html:true});
+    $('#emailSubmit').tooltip({html:true});
 
 //    파일에서 이메일주소 목록 불러와 리스트 구현하기.
 //    $.ajax('/getAddress', {
@@ -229,6 +267,19 @@
         }
       });
     }
+
+    $('#getHTML').click(function (e) {
+      e.preventDefault();
+      if ($('#innerHtmlDiv').css('display') == 'none') {
+        $('#innerHtml').text($('#editor').html());
+        $('#innerHtmlSign').text($('#editorSign').html());
+      } else {
+        $('#innerHtml').text('');
+        $('#innerHtmlSign').text('');
+      }
+      $('#innerHtmlDiv').slideToggle(200);
+
+    })
 
     $('#showAllAddress').click(function (e) {
       e.preventDefault();

@@ -3,19 +3,36 @@
  */
 
 #editor {
-	max-height: 250px;
-	height: 250px;
+	/*max-height: 500px;*/
+  min-height: 300px;
+	height: auto;
 	background-color: white;
 	border-collapse: separate; 
 	border: 1px solid rgb(204, 204, 204); 
-	padding: 4px; 
+	padding: 8px;
 	box-sizing: content-box; 
 	-webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
 	box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
 	border-top-right-radius: 3px; border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px; border-top-left-radius: 3px;
-	overflow: scroll;
+	/*overflow: scroll;*/
 	outline: none;
+}
+
+#editorSign {
+  /*max-height: 500px;*/
+  min-height: 100px;
+  height: auto;
+  background-color: white;
+  border-collapse: separate;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 8px;
+  box-sizing: content-box;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+  border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+  outline: none;
 }
 #voiceBtn {
   width: 20px;
