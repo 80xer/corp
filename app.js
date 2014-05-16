@@ -12,7 +12,7 @@ var path = require('path');
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 11111);
+app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -34,8 +34,8 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/views/' + 'index.html');
 });
 
-app.get('/yuri', function (req, res) {
-  res.sendfile(__dirname + '/views/' + 'yuri.html');
+app.get('/yoori', function (req, res) {
+  res.sendfile(__dirname + '/views/' + 'yoori.html');
 });
 
 app.post('/uploadAddress', function (req, res) {
@@ -119,11 +119,11 @@ app.post('/sendEmail', function (req, res) {
   });
 });
 
-app.get('/files/logo.png', function (req, res) {
-  res.sendfile(__dirname + '/files/logo.png');
+app.get('/files/:fileName', function (req, res) {
+  res.sendfile(__dirname + '/files/' + req.params.fileName);
 })
 
-app.post('/sendYooriEmail', function (req, res) {
+app.post('/sendYooriEmail2', function (req, res) {
   var nodemailer = require("nodemailer");
   var smtpTransport = nodemailer.createTransport("SMTP", {
     service: "Gmail",
@@ -139,7 +139,7 @@ app.post('/sendYooriEmail', function (req, res) {
 
   var sign = '<div>' +
     '<div dir="ltr">' +
-    '<img src=​"http://thisground.com/files/logo.png" width=​"96" height=​"30">​' +
+    '<img src="http://thisground.com/files/logo.png" width="96" height="30">' +
     '<br>' +
     '<div></div>' +
     '<div></div>'
@@ -183,7 +183,7 @@ app.post('/sendYooriEmail', function (req, res) {
 
 });
 
-app.post('/sendYuriEmail', function (req, res) {
+app.post('/sendYooriEmail', function (req, res) {
   var email     = require("emailjs/email");
   var server     = email.server.connect({
     user:    "thisground.office",
@@ -193,6 +193,41 @@ app.post('/sendYuriEmail', function (req, res) {
     host:    "smtp.gmail.com",
     ssl:     true
   });
+
+  var sign = '<br clear="all">' +
+    '<div>' +
+    '<div dir="ltr">' +
+    '<img src="http://thisground.com/files/logo.png" width="96" height="30"><br>' +
+    '<div>' +
+    '<font face="times new roman, serif">' +
+    '<span style="color:rgb(51,51,51);font-size:12px;line-height:15.359999656677246px">' +
+    'Build your ground in ' +
+    '<b>THISGROUD</b>' +
+    ' with various inspiration!' +
+    '</span>' +
+    '<br style="color:rgb(51,51,51);font-size:12px;line-height:15.359999656677246px">' +
+    '<span style="color:rgb(51,51,51);font-size:12px;line-height:15.359999656677246px">' +
+    '<b>THISGROUND</b>' +
+    ' is a place to share creative activity.' +
+    '</span>' +
+    '</font>' +
+    '<br>' +
+    '</div>' +
+    '<div>' +
+    '<font face="times new roman, serif">' +
+    '<span style="color:rgb(51,51,51);font-size:12px;line-height:15.359999656677246px">' +
+    '<a href="https://www.facebook.com/pages/THISGROUND/306451286160039" target="_blank"><img src="http://thisground.com/files/fb.png">' +
+    '</a>' +
+    '&nbsp;&nbsp;' +
+    '<a href="http://instagram.com/thisground" target="_blank">' +
+    '<img src="http://thisground.com/files/ig.png">' +
+    '</a>' +
+    '<br>' +
+    '</span>' +
+    '</font>' +
+    '</div>' +
+    '</div>' +
+    '</div>';
 
   var toto = req.body.emailTo.toString().split(',');
   var len = toto.length;
@@ -214,12 +249,7 @@ app.post('/sendYuriEmail', function (req, res) {
       subject: req.body.emailSubject.replace(/\$name/g, name),
       attachment:
         [
-          {data:req.body.emailHTML.replace(/\$name/g, name) + '<div>' +
-            '<div dir="ltr">' +
-            '<img src=​"http://www.thisground.com/files/logo.png" width=​"96" height=​"30">​' +
-            '<br>' +
-            '<div></div>' +
-            '<div></div>', alternative:true}
+          {data:req.body.emailHTML.replace(/\$name/g, name) + sign, alternative:true}
         ]
     }, function (err, message) {
       if (err) {
