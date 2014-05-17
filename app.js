@@ -46,8 +46,6 @@ app.get('/yoorimail', function (req, res) {
   console.log(auth);
   if (auth === true) {
     auth = false;
-    console.log('aft auth:');
-    console.log(auth);
     res.sendfile(__dirname + '/views/' + 'yoori.html');
   } else {
     res.sendfile(__dirname + '/views/' + 'loginfail.html');
