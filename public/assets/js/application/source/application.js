@@ -201,7 +201,10 @@ $( document ).ajaxSend( function() {
     if($(".loading").length == 0) {
         $("body").append('<div class="loading"><div class="progress progress-striped active"><div class="bar"></div></div></div>');
         $(".loading").slideDown();
-        $(".loading .progress .bar").delay(300).css("width", "100%");
+        $(".loading .progress .bar").delay(3000).css("width", "100%");
+    } else {
+      $(".loading").slideDown();
+      $(".loading .progress .bar").delay(3000).css("width", "100%");
     }
 });
 
@@ -213,6 +216,7 @@ $( document ).ajaxSend( function() {
 $( document ).ajaxComplete(function() {
     /* Remove loading section. */
     $(".loading").delay(1000).slideUp(500, function(){
+      $(".loading .progress .bar").delay(3000).css("width", "0%");
         $(this).remove();
     });
     

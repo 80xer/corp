@@ -83,6 +83,20 @@ app.post('/uploadAddress', function (req, res) {
   });
 });
 
+app.get('/getAddressAll', function (req, res) {
+  var fs = require('fs');
+  var filename = __dirname + '/files/mail.txt';
+  var input = fs.createReadStream(__dirname + '/files/mail.txt');
+  var array = fs.readFileSync(__dirname + '/files/mail.txt').toString().split('\n');
+  fs.readFile(filename, 'utf8', function(err, data) {
+    if (err) throw err;
+    console.log('OK: ' + filename);
+    console.log(data);
+    res.send(array);
+  });
+
+});
+
 app.get('/getAddress', function (req, res) {
   var fs = require('fs');
   var arr = [];
@@ -92,12 +106,19 @@ app.get('/getAddress', function (req, res) {
 
     input.on('data', function(data) {
       remaining += data;
-      var index = remaining.indexOf('\n');
+      var indexRN = remaining.indexOf('\r\n') || NaN;
+      var indexR = remaining.indexOf('\r') || NaN;
+      var indexN = remaining.indexOf('\n') || NaN;
+      var index = getMin(indexRN, getMin(indexR, indexN));
+
       while (index > -1) {
         var line = remaining.substring(0, index);
         remaining = remaining.substring(index + 1);
         arr.push(line);
-        index = remaining.indexOf('\n');
+        indexRN = remaining.indexOf('\r\n');
+        indexR = remaining.indexOf('\r');
+        indexN = remaining.indexOf('\n');
+        index = getMin(indexRN, getMin(indexR, indexN));
       }
     });
 
@@ -107,6 +128,12 @@ app.get('/getAddress', function (req, res) {
       }
       res.send(arr);
     });
+  }
+
+  function getMin(a, b) {
+    if (a == -1) return b;
+    if (b == -1) return a;
+    return Math.min(a,b);
   }
 
   function func(data) {
